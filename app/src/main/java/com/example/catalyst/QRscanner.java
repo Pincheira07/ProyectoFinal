@@ -14,6 +14,11 @@ import com.example.catalyst.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+
+
+import java.util.Calendar;
+import java.util.Date;
+
 public class QRscanner extends AppCompatActivity implements View.OnClickListener {
 
     Button scanBtn;
@@ -29,11 +34,11 @@ public class QRscanner extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        scanCode();
+        escanearCodigo();
 
     }
 
-    private void scanCode() {
+    private void escanearCodigo() {
         IntentIntegrator intengrator = new IntentIntegrator(this);
         intengrator.setCaptureActivity(CaptureAct.class);
         intengrator.setOrientationLocked(false);
@@ -45,32 +50,37 @@ public class QRscanner extends AppCompatActivity implements View.OnClickListener
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null){
-            if (result.getContents() != null){
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Sala 105-D");
-                builder.setTitle("Ingreso guardado");
-                builder.setPositiveButton("Escanea de nuevo", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        IntentResult resultado = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (resultado != null){
+            mensajeEjecucion(resultado);
 
-                    }
-                }).setNegativeButton("Terminar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-            else{
-                Toast.makeText(this, "Sin resultados", Toast.LENGTH_LONG).show();
-            }
         }else{
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void mensajeEjecucion(IntentResult resultado){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Código escaneado: ");
+        builder.setMessage(resultado.getContents() +", "+fechaHora(resultado));
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
     }
+
+
+    public static String fechaHora(IntentResult resultado){
+        String fechaHora = "";
+        if (resultado !=null){
+            Calendar today = Calendar.getInstance();
+            fechaHora = today.getTime().toString();
+        }
+        return fechaHora;
+
+    }
+
+
+
+
+
 }
