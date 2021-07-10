@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="main.MainActivity">
 
     <Button
         android:id="@+id/scanBtn"
@@ -14,4 +14,17 @@
         android:text="Escanear"
         android:textSize="30sp"
         />
+
+    <Button
+        android:id="@+id/updtBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
+        android:text="Marcar salida"
+        android:textSize="30sp"
+        />
+
+
+
 </RelativeLayout>

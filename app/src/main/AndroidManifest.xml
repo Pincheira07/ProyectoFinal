@@ -31,20 +31,14 @@
             android:value="@string/google_maps_key" />
 
 
-        <activity android:name=".Maps"
-            android:screenOrientation="portrait"/>
         <activity android:name=".QRscanner" />
-        <activity android:name=".MainActivity">
+        <activity android:name="main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CaptureAct"
-            android:screenOrientation="fullSensor"
-            android:stateNotNeeded="true"
-            android:windowSoftInputMode="stateAlwaysHidden" />
 
     </application>
 

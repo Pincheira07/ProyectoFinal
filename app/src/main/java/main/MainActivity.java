@@ -1,11 +1,14 @@
-package com.example.catalyst;
-
-import androidx.appcompat.app.AppCompatActivity;
+package main;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.catalyst.QRscanner;
+import com.example.catalyst.R;
 
 public class MainActivity extends AppCompatActivity {
 
