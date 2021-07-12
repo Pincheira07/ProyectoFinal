@@ -8,16 +8,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+
+import modelo.EnviarRegistros;
 
 public class QRscanner extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,6 +29,8 @@ public class QRscanner extends AppCompatActivity implements View.OnClickListener
 
         scanBtn = findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(this);
+
+
     }
 
 
@@ -72,20 +70,8 @@ public class QRscanner extends AppCompatActivity implements View.OnClickListener
     }
 
     private void ejecutarServicio(String url,String codigo, String usuario, String hora ){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> Toast.makeText(getApplicationContext(), "OPERACION EXITOSA", Toast.LENGTH_SHORT).show(), error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show())
-        {
-            @Override
-            protected Map<String, String> getParams(){
-                Map<String, String> parametros = new HashMap<>();
-                parametros.put("codigo", codigo);
-                parametros.put("usuario", usuario);
-                parametros.put("hora", hora);
-
-                return parametros;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        EnviarRegistros entrada = new EnviarRegistros(this,url, codigo, usuario, hora);
+        entrada.ejecutarServicio();
     }
 
     public static String fechaHora(){
@@ -95,11 +81,4 @@ public class QRscanner extends AppCompatActivity implements View.OnClickListener
         return fechaHora;
 
     }
-
-
-
-
-
-
-
 }
