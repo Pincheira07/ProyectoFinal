@@ -40,7 +40,7 @@ public class QRscanner extends AppCompatActivity implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        mostrarContador();
+        escanearCodigo();
 
 
     }
