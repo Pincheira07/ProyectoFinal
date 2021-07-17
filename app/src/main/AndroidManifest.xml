@@ -31,7 +31,7 @@
             android:value="@string/google_maps_key" />
 
 
-        <activity android:name=".QRscanner" />
+        <activity android:name="GUIs.QRscanner" />
         <activity android:name="main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

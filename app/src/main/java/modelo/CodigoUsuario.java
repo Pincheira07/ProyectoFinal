@@ -1,9 +1,9 @@
 package modelo;
 
 public class CodigoUsuario {
-    String nombre;
-    String usuario;
-    String fecha;
+    private String nombreLugar;
+    private Usuario usuario;
+    private String fecha;
 
 
 }

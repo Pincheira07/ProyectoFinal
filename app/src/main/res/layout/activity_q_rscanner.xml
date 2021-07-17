@@ -14,16 +14,13 @@
         android:text="Escanear"
         android:textSize="30sp"
         />
-
-    <Button
-        android:id="@+id/updtBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/contador"
         android:layout_height="wrap_content"
-        android:layout_marginTop="450dp"
-        android:text="Marcar salida"
-        android:textSize="30sp"
-        />
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="390dp"/>
+
 
 
 

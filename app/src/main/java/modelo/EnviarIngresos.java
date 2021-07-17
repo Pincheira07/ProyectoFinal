@@ -11,7 +11,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EnviarRegistros {
+public class EnviarIngresos{
     private Context contexto;
     private String url;
     private String codigo;
@@ -19,7 +19,7 @@ public class EnviarRegistros {
     private String hora;
 
 
-    public EnviarRegistros(Context contexto, String url, String codigo, String usuario, String hora) {
+    public EnviarIngresos(Context contexto, String url, String codigo, String usuario, String hora) {
         this.contexto = contexto;
         this.url = url;
         this.codigo = codigo;

@@ -1,43 +1,47 @@
-package com.example.catalyst;
+package GUIs;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.catalyst.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.Calendar;
 
-import modelo.EnviarRegistros;
+import modelo.Conexion;
+import modelo.EnviarIngresos;
 
 public class QRscanner extends AppCompatActivity implements View.OnClickListener {
 
 
     Button scanBtn;
+    Button countBtn;
+    TextView contador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_q_rscanner);
 
-
-
         scanBtn = findViewById(R.id.scanBtn);
         scanBtn.setOnClickListener(this);
+
+        contador = findViewById(R.id.contador);
 
 
     }
 
-
-
     @Override
     public void onClick(View v) {
-        escanearCodigo();
+        mostrarContador();
+
 
     }
 
@@ -53,8 +57,8 @@ public class QRscanner extends AppCompatActivity implements View.OnClickListener
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         IntentResult resultado = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (resultado != null){
-            if(resultado.getContents()!=null){
-                ejecutarServicio("http://192.168.0.8:8080/catalyst/registro.php",resultado.getContents(), codigo(), fechaHora());
+            if(((IntentResult) resultado).getContents()!=null){
+                enviarDatos("http://192.168.0.8:8080/catalyst/registro.php",resultado.getContents(), codigo(), fechaHora());
 
             }else{
                 Toast.makeText(this,"Sin resultados", Toast.LENGTH_LONG).show();
@@ -64,13 +68,18 @@ public class QRscanner extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    private String codigo() {
-        String codigo = "MP" + "-" + "308" + "-" + Math.random();
-        return codigo;
+    private void mostrarContador() {
+        Conexion conexion = new Conexion();
+        contador.setText(String.valueOf(conexion.contar()));
+
     }
 
-    private void ejecutarServicio(String url,String codigo, String usuario, String hora ){
-        EnviarRegistros entrada = new EnviarRegistros(this,url, codigo, usuario, hora);
+    private String codigo() {
+        return "MP" + "-" + "308" + "-" + Math.random();
+    }
+
+    private void enviarDatos(String url,String codigo, String usuario, String hora ){
+        EnviarIngresos entrada = new EnviarIngresos(this,url, codigo, usuario, hora);
         entrada.ejecutarServicio();
     }
 
